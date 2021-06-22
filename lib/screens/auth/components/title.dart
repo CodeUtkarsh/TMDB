@@ -15,7 +15,7 @@ class LogInTitle extends StatelessWidget {
       style: const TextStyle(
         color: Colors.white,
         fontWeight: FontWeight.w600,
-        fontSize:34,
+        fontSize: 34,
       ),
     );
   }

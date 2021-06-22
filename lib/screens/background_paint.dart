@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart';
 import '../config/palette.dart';
 
 class BackgroundPainter extends CustomPainter {
-  BackgroundPainter({ Animation<double> animation})
+  BackgroundPainter({Animation<double> animation})
       : bluePaint = Paint()
           ..color = Palette.lightBlue
           ..style = PaintingStyle.fill,
@@ -68,7 +68,7 @@ class BackgroundPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     print('Painting');
     paintBlue(canvas, size);
-    paintGrey(canvas,size);
+    paintGrey(canvas, size);
     paintOrange(canvas, size);
   }
 
@@ -77,7 +77,7 @@ class BackgroundPainter extends CustomPainter {
     path.moveTo(size.width, size.height / 2);
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
-       path.lineTo(0, lerpDouble(0, size.height, blueAnim.value));
+    path.lineTo(0, lerpDouble(0, size.height, blueAnim.value));
     _addPointsToPath(path, [
       Point(
         lerpDouble(0, size.width / 3, blueAnim.value),
@@ -153,7 +153,7 @@ class BackgroundPainter extends CustomPainter {
     if (orangeAnim.value > 0) {
       final path = Path();
 
-      path.moveTo(size.width*3/4, 0);
+      path.moveTo(size.width * 3 / 4, 0);
       path.lineTo(0, 0);
       path.lineTo(
         0,
@@ -170,12 +170,12 @@ class BackgroundPainter extends CustomPainter {
             size.width / 7,
             lerpDouble(
               0,
-              size.height/6,
+              size.height / 6,
               liquidAnim.value,
             ),
           ),
           Point(
-            size.width/3,
+            size.width / 3,
             lerpDouble(
               0,
               size.height / 10,
@@ -183,7 +183,7 @@ class BackgroundPainter extends CustomPainter {
             ),
           ),
           Point(
-            size.width /3 * 2,
+            size.width / 3 * 2,
             lerpDouble(
               0,
               size.height / 8,
@@ -191,7 +191,7 @@ class BackgroundPainter extends CustomPainter {
             ),
           ),
           Point(
-            size.width*3/4,
+            size.width * 3 / 4,
             0,
           ),
         ],

@@ -85,13 +85,12 @@ class _RoundContinueButton extends StatelessWidget {
       shape: const CircleBorder(),
       child: const Icon(
         FontAwesomeIcons.longArrowAltRight,
-        color:Colors.white,
-        size:24.0,
+        color: Colors.white,
+        size: 24.0,
       ),
     );
   }
 }
-
 
 class SignInBar extends StatelessWidget {
   const SignInBar({
@@ -132,4 +131,3 @@ class SignInBar extends StatelessWidget {
         ));
   }
 }
-

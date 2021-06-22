@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/screens/auth/decoration_functions.dart';
-import 'package:tmdb/screens/auth/sign_in_up_bar.dart';
-import 'package:tmdb/screens/auth/title.dart';
+import 'package:tmdb/screens/auth/components/decoration_functions.dart';
+import 'package:tmdb/screens/auth/components/sign_in_up_bar.dart';
+import 'package:tmdb/screens/auth/components/title.dart';
 
 class Register extends StatelessWidget {
   const Register({

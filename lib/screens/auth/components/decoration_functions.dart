@@ -16,28 +16,28 @@ InputDecoration registerInputDecoration({String hintText}) {
       borderSide: BorderSide(color: Palette.orange),
     ),
     focusedErrorBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(width: 2.0,color: Palette.orange),
+      borderSide: BorderSide(width: 2.0, color: Palette.orange),
     ),
     errorStyle: const TextStyle(color: Colors.white),
   );
 }
 
-InputDecoration signInInputDecoration({String hintText}){
+InputDecoration signInInputDecoration({String hintText}) {
   return InputDecoration(
-    contentPadding: const EdgeInsets.symmetric(vertical:18.0),
+    contentPadding: const EdgeInsets.symmetric(vertical: 18.0),
     hintText: hintText,
     focusedBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(width:2,color: Palette.darkBlue),
+      borderSide: BorderSide(width: 2, color: Palette.darkBlue),
     ),
     enabledBorder: const UnderlineInputBorder(
       borderSide: BorderSide(color: Palette.darkBlue),
     ),
     errorBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(color:Palette.darkOrange),
+      borderSide: BorderSide(color: Palette.darkOrange),
     ),
     focusedErrorBorder: const UnderlineInputBorder(
-      borderSide: BorderSide(width:2.0,color: Palette.darkOrange),
+      borderSide: BorderSide(width: 2.0, color: Palette.darkOrange),
     ),
-    errorStyle: const TextStyle(color:Palette.darkOrange),
+    errorStyle: const TextStyle(color: Palette.darkOrange),
   );
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/config/palette.dart';
-import 'package:tmdb/screens/auth/decoration_functions.dart';
-import 'package:tmdb/screens/auth/sign_in_up_bar.dart';
-import 'package:tmdb/screens/auth/title.dart';
+
+import 'package:tmdb/screens/auth/components/decoration_functions.dart';
+import 'package:tmdb/screens/auth/components/sign_in_up_bar.dart';
+import 'package:tmdb/screens/auth/components/title.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({
@@ -49,44 +49,44 @@ class SignIn extends StatelessWidget {
                   onPressed: () {},
                 ),
                 // Expanded(
-                //   child: 
+                //   child:
                 Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      children: [
-                        InkWell(
-                          splashColor: Colors.white,
-                          onTap: () {
-                            onRegisterClicked?.call();
-                          },
-                          child: RichText(
-                            text: const TextSpan(
-                              text: "Don't have an account?",
-                              style: TextStyle(color: Colors.black54),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: 'SIGN UP',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    children: [
+                      InkWell(
+                        splashColor: Colors.white,
+                        onTap: () {
+                          onRegisterClicked?.call();
+                        },
+                        child: RichText(
+                          text: const TextSpan(
+                            text: "Don't have an account?",
+                            style: TextStyle(color: Colors.black54),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'SIGN UP',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-
-                          // // child: const Text(
-                          // //   'Sign Up',
-                          // //   style: TextStyle(
-                          // //     color: Palette.darkBlue,
-                          // //     fontSize: 16,
-                          // //     decoration: TextDecoration.underline,
-                          // //   ),
-                          //),
                         ),
-                      ],
-                    ),
+
+                        // // child: const Text(
+                        // //   'Sign Up',
+                        // //   style: TextStyle(
+                        // //     color: Palette.darkBlue,
+                        // //     fontSize: 16,
+                        // //     decoration: TextDecoration.underline,
+                        // //   ),
+                        //),
+                      ),
+                    ],
                   ),
+                ),
                 // ),
               ],
             ),

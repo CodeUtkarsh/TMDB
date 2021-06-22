@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb/screens/auth/register.dart';
+import 'package:tmdb/screens/auth/components/register.dart';
 
 import '../background_paint.dart';
-import 'sign_in.dart';
+import 'components/sign_in.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key key}) : super(key: key);
@@ -19,7 +19,6 @@ class _AuthScreenState extends State<AuthScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     _controller = AnimationController(
       vsync: this,
       duration: Duration(seconds: 2),
@@ -29,7 +28,6 @@ class _AuthScreenState extends State<AuthScreen>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _controller.dispose();
     super.dispose();
   }
@@ -48,17 +46,17 @@ class _AuthScreenState extends State<AuthScreen>
           ),
           ValueListenableBuilder<bool>(
             builder: (context, value, child) {
-                return value?SignIn(
-                  onRegisterClicked: (){
-                    showSignInPage.value=false;
-                    _controller.forward();
-                  }
-                ):Register(
-                  onSignInPressed: (){
-                     showSignInPage.value=true;
-                    _controller.reverse();
-                  },
-                );
+              return value
+                  ? SignIn(onRegisterClicked: () {
+                      showSignInPage.value = false;
+                      _controller.forward();
+                    })
+                  : Register(
+                      onSignInPressed: () {
+                        showSignInPage.value = true;
+                        _controller.reverse();
+                      },
+                    );
             },
             valueListenable: showSignInPage,
           ),
