@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb/screens/auth/register.dart';
 
 import '../background_paint.dart';
 import 'sign_in.dart';
+
 class AuthScreen extends StatefulWidget {
-  const AuthScreen({ Key key }) : super(key: key);
+  const AuthScreen({Key key}) : super(key: key);
 
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateMixin{
-   AnimationController _controller;
+class _AuthScreenState extends State<AuthScreen>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+
+  ValueNotifier<bool> showSignInPage = ValueNotifier<bool>(true);
+
   @override
   void initState() {
     // TODO: implement initState
-    _controller= AnimationController(
+    _controller = AnimationController(
       vsync: this,
       duration: Duration(seconds: 2),
     );
@@ -27,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
     _controller.dispose();
     super.dispose();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +46,22 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
               ),
             ),
           ),
-          SignIn(),
+          ValueListenableBuilder<bool>(
+            builder: (context, value, child) {
+                return value?SignIn(
+                  onRegisterClicked: (){
+                    showSignInPage.value=false;
+                    _controller.forward();
+                  }
+                ):Register(
+                  onSignInPressed: (){
+                     showSignInPage.value=true;
+                    _controller.reverse();
+                  },
+                );
+            },
+            valueListenable: showSignInPage,
+          ),
         ],
       ),
     );

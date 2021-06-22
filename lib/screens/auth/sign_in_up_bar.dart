@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tmdb/config/palette.dart';
 
-class SignInBar extends StatelessWidget {
-  const SignInBar({
+class SignUpBar extends StatelessWidget {
+  const SignUpBar({
     Key key,
     @required this.label,
     @required this.onPressed,
@@ -25,7 +25,7 @@ class SignInBar extends StatelessWidget {
               label,
               style: const TextStyle(
                 fontWeight: FontWeight.w800,
-                color: Palette.darkBlue,
+                color: Colors.white,
                 fontSize: 24,
               ),
             ),
@@ -91,3 +91,45 @@ class _RoundContinueButton extends StatelessWidget {
     );
   }
 }
+
+
+class SignInBar extends StatelessWidget {
+  const SignInBar({
+    Key key,
+    @required this.label,
+    @required this.onPressed,
+    @required this.isLoading,
+  }) : super(key: key);
+
+  final String label;
+  final VoidCallback onPressed;
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              label,
+              style: const TextStyle(
+                fontWeight: FontWeight.w800,
+                color: Palette.darkBlue,
+                fontSize: 24,
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: _LoadingIndicator(isLoading: isLoading),
+              ),
+            ),
+            _RoundContinueButton(
+              onPressed: onPressed,
+            ),
+          ],
+        ));
+  }
+}
+
