@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tmdb/config/palette.dart';
+import 'package:tmdb/screens/home_splash.dart';
+import 'package:tmdb/screens/onboarding/onboarding_screen.dart';
 import './screens/auth/auth.dart';
 
 void main() {
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TMDB',
-      home: AuthScreen(),
+      home: OnboadingScreen(),
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: GoogleFonts.mulishTextTheme(),
@@ -23,6 +25,10 @@ class MyApp extends StatelessWidget {
           color: Palette.darkBlue,
         ),
       ),
+      routes: {
+        'home': (context) => OnboadingScreen(),
+        'auth-screen': (context) => AuthScreen(),
+      },
     );
   }
 }

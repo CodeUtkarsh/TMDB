@@ -4,13 +4,20 @@ import 'package:tmdb/screens/auth/components/decoration_functions.dart';
 import 'package:tmdb/screens/auth/components/sign_in_up_bar.dart';
 import 'package:tmdb/screens/auth/components/title.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   const SignIn({
     Key key,
     @required this.onRegisterClicked,
   }) : super(key: key);
 
   final VoidCallback onRegisterClicked;
+
+  @override
+  _SignInState createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+  bool showCheckList = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +50,10 @@ class SignIn extends StatelessWidget {
                     decoration: signInInputDecoration(hintText: 'Password'),
                   ), //Text('Email')//EmailTextFormField(),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+
                 SignInBar(
                   isLoading: false,
                   label: 'Sign In',
@@ -57,7 +68,7 @@ class SignIn extends StatelessWidget {
                       InkWell(
                         splashColor: Colors.white,
                         onTap: () {
-                          onRegisterClicked?.call();
+                          widget.onRegisterClicked?.call();
                         },
                         child: RichText(
                           text: const TextSpan(
