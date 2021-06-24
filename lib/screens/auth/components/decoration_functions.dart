@@ -4,7 +4,7 @@ import 'package:tmdb/config/palette.dart';
 InputDecoration registerInputDecoration({String hintText}) {
   return InputDecoration(
     contentPadding: const EdgeInsets.symmetric(vertical: 18.0),
-    hintStyle: const TextStyle(color: Colors.white, fontSize: 18),
+    hintStyle: const TextStyle(color: Colors.white, fontSize: 20),
     hintText: hintText,
     focusedBorder: const UnderlineInputBorder(
       borderSide: BorderSide(color: Colors.white, width: 2),
