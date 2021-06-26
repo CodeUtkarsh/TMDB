@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tmdb/screens/auth/components/register.dart';
 
 import '../background_paint.dart';
@@ -14,8 +19,61 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
-
   ValueNotifier<bool> showSignInPage = ValueNotifier<bool>(true);
+
+  /// Authemntication
+  final _auth = FirebaseAuth.instance;
+  var _isLoading = false;
+
+  void _submitAuthForm(
+    String email,
+    String passwd,
+    bool isLogin,
+    BuildContext ctx,
+  ) async {
+    await Firebase.initializeApp();
+
+    UserCredential authResult;
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      if (isLogin) {
+        authResult = await _auth.signInWithEmailAndPassword(
+            email: email, password: passwd);
+      } else {
+        authResult = await _auth.createUserWithEmailAndPassword(
+            email: email, password: passwd);
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(authResult.user.uid)
+            .set({
+          'email': email,
+        });
+      }
+    } on PlatformException catch (err) {
+      var message = 'An error occured, please check your credentials';
+      if (err.message != null) {
+        message = err.message;
+      }
+
+      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: Color.fromRGBO(49, 39, 79, 1),
+      ));
+
+      setState(() {
+        _isLoading = true;
+      });
+    } catch (e) {
+      print(e);
+
+      setState(() {
+        _isLoading = true;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -56,6 +114,7 @@ class _AuthScreenState extends State<AuthScreen>
                         showSignInPage.value = true;
                         _controller.reverse();
                       },
+                      submitFn: _submitAuthForm,
                     );
             },
             valueListenable: showSignInPage,

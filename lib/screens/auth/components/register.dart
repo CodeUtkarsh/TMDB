@@ -8,9 +8,12 @@ class Register extends StatefulWidget {
   Register({
     Key key,
     this.onSignInPressed,
+    this.submitFn,
   }) : super(key: key);
 
   final VoidCallback onSignInPressed;
+  final void Function(
+      String email, String password, bool isLogin, BuildContext ctx) submitFn;
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -19,6 +22,24 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   bool showText = false;
   List<bool> crossOf = [false, false, false, false];
+  final _formKey = GlobalKey<FormState>();
+  String _userEmail = '';
+  String _userPasswd = '';
+
+  void _trySubmit() {
+    final isValid = _formKey.currentState.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      _formKey.currentState.save();
+      widget.submitFn(
+        _userEmail.trim(),
+        _userPasswd.trim(),
+        false,
+        context,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +60,7 @@ class _RegisterState extends State<Register> {
           Expanded(
             flex: 7,
             child: Form(
+              key: _formKey,
               child: ListView(
                 shrinkWrap: true,
                 children: [
@@ -46,6 +68,14 @@ class _RegisterState extends State<Register> {
                     padding:
                         EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
                     child: TextFormField(
+                      validator: (value) {
+                        if (value.isEmpty || !value.contains('@')) {
+                          return 'Enter valid email';
+                        }
+                        return null;
+                      },
+                      onSaved: (newValue) => _userEmail = newValue,
+                      keyboardType: TextInputType.emailAddress,
                       style: TextStyle(fontSize: 22.0, color: Colors.white),
                       decoration: registerInputDecoration(hintText: 'Email'),
                     ), //Text('Email')//EmailTextFormField(),
@@ -60,6 +90,12 @@ class _RegisterState extends State<Register> {
                           showText = true;
                         });
                       },
+                      validator: (value) {
+                        if (value.isEmpty || value.length < 7)
+                          return 'Password should be atleast 7 characters long';
+                        return null;
+                      },
+                      onSaved: (newValue) => _userPasswd = newValue,
                       onChanged: (value) {
                         if (value.length >= 8) {
                           setState(() {
@@ -102,7 +138,7 @@ class _RegisterState extends State<Register> {
                   SignUpBar(
                     isLoading: false,
                     label: 'Sign Up',
-                    onPressed: () {},
+                    onPressed: _trySubmit,
                   ),
                   Align(
                     alignment: Alignment.centerLeft,
